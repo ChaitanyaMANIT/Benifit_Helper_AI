@@ -110,7 +110,7 @@ Gemini AI Classification (via geminiService.ts)
 
 ## 📱 Screen Recording
 
-If running on mobile, please check the [screen recording here](assets/screenshots/demo_mobile.mp4).
+If running on mobile, please check the [screen recording here](https://drive.google.com/file/d/19wvBRU_J0vKyFPw3qcHPGbQWUpLed30C/view?usp=sharing).
 
 ---
 
