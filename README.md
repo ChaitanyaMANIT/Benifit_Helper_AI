@@ -91,7 +91,7 @@ Gemini AI Classification (via geminiService.ts)
 <div align="center">
 
 ### 1. Home Page (Light Mode)
-<img src="assets/screenshots/homepage_light.png" alt="Home Page Light Mode" width="800"/>
+<img src="504260e4a6e64338894c8fe534ad922d.jpg" alt="Home Page Light Mode" width="800"/>
 
 ### 2. Home Page (Dark Mode, Input Example)
 <img src="assets/screenshots/homepage_dark.png" alt="Home Page Dark Mode" width="800"/>
