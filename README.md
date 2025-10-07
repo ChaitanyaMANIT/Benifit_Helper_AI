@@ -17,15 +17,100 @@
 
 **AI Benefits Helper** is an intelligent web application that uses Google's Gemini AI to analyze your health concerns and instantly recommend the most suitable health benefits from a curated database. Whether you need dental care, vision services, mental health support, or general medical consultations, our AI will match you with the perfect benefits.
 
-### ✨ Key Features
+---
 
-- 🤖 **AI-Powered Analysis**: Uses Google Gemini AI for intelligent health concern classification
-- ⚡ **Instant Results**: Get personalized benefit recommendations in seconds
-- 🎯 **Precise Matching**: Smart categorization into Dental, Vision, Mental Health, and OPD services
-- 📋 **Action Plans**: AI-generated step-by-step guides to avail your selected benefits
-- 🌙 **Dark/Light Mode**: Beautiful theme switching with smooth transitions
-- 📱 **Responsive Design**: Optimized for desktop, tablet, and mobile devices
-- 🔒 **Secure & Private**: Your health information is protected and confidential
+## 📝 Prompts Used and Refinements
+
+### Example Prompts Used
+
+- "I have tooth pain and need help."
+- "I feel anxious and want to talk to someone."
+- "I need a new pair of eyeglasses."
+- "I want to consult a general physician for my recurring headaches."
+
+#### Prompt Refinement Strategy
+
+- The user’s freeform text is sent to the Gemini AI through `geminiService.ts` for classification into one of: Dental, Vision, Mental Health, or OPD.
+- If the AI returns a low-confidence result or an ambiguous category, the app prompts the user for clarification.
+- The action plan generation prompt is:  
+  *“Generate a 3-step, actionable plan for a user to avail this benefit: [Benefit Name]. Tailor the steps for the Indian healthcare context.”*
+
+#### Improvements Made
+
+- Added context to prompts to improve accuracy for Indian benefit schemes.
+- Implemented user clarification UI when classification confidence is low.
+
+---
+
+## 🏗️ Architecture Explanation
+
+### High-Level Diagram
+
+```
+User Input
+   │
+   ▼
+Gemini AI Classification (via geminiService.ts)
+   │
+   ├──> Benefits Data Service (benefitService.ts)
+   │         │
+   │         ▼
+   └──> Redux Store (RTK Query)
+             │
+             ▼
+        UI Components (React + Tailwind)
+```
+
+### Architecture Choices
+
+- **React 19 + TypeScript**: For type safety, maintainability, and leveraging modern hooks.
+- **Redux Toolkit + RTK Query**:  
+  - Global state for theme, user’s input, and selected benefits.
+  - RTK Query for efficient, cache-aware async data fetching.
+- **Context API**: For theme management (`ThemeContext.tsx`) to allow toggling dark/light mode across the app.
+- **Vite**: Fast local dev and optimized builds.
+- **Gemini API**: AI-powered categorization and action plan generation.
+
+---
+
+## ⚙️ State Management
+
+- **Redux Slices**:
+  - `benefitsSlice`: Stores available benefits and filtered results.
+  - `userInputSlice`: Tracks health concern text and selected category.
+  - `uiSlice`: Modal states, loading, and error messages.
+- **ThemeContext**:  
+  - Provides `theme` and `toggleTheme` for dark/light mode.
+- **RTK Query**:  
+  - Handles async AI calls and benefits fetching with loading/error states.
+
+---
+
+## 🖼 Screenshots
+
+<div align="center">
+
+### 1. Home Page (Light Mode)
+<img src="assets/screenshots/homepage_light.png" alt="Home Page Light Mode" width="800"/>
+
+### 2. Home Page (Dark Mode, Input Example)
+<img src="assets/screenshots/homepage_dark.png" alt="Home Page Dark Mode" width="800"/>
+
+### 3. Matched Benefits (Dark Mode)
+<img src="assets/screenshots/matched_benefits.png" alt="Matched Benefits Page" width="800"/>
+
+</div>
+
+> **Note:** Images above correspond to the following:
+> 1. Home page where user describes their health concern (Light Mode)
+> 2. Home page with dark theme and sample input
+> 3. Results page showing matched dental benefits
+
+---
+
+## 📱 Screen Recording
+
+If running on mobile, please check the [screen recording here](assets/screenshots/demo_mobile.mp4).
 
 ---
 
@@ -35,36 +120,40 @@
 
 ---
 
-## 🛠️ Technology Stack
+## 📊 Available Benefits
 
-### Frontend
-- **React 19** - Latest React with modern hooks and features
-- **TypeScript** - Type-safe development
-- **Vite** - Lightning-fast build tool and dev server
-- **Tailwind CSS** - Utility-first CSS framework
-- **Redux Toolkit** - State management with RTK Query
-- **React Router** - Client-side routing
+### 🦷 Dental Benefits
+- Annual Dental Check-up & Cleaning (₹3,000/year)
+- Root Canal Treatment (50% coverage)
+- Tooth Extraction (₹1,500 coverage)
 
-### AI & Backend Services
-- **Google Gemini API** - AI-powered health concern classification
-- **Axios** - HTTP client for API requests
+### 👁️ Vision Benefits
+- Annual Eye Examination (Free)
+- Prescription Eyeglasses (₹5,000 allowance)
+- Contact Lens Coverage (₹4,000/year)
 
-### UI/UX
-- **Lottie React** - Beautiful animations
-- **Custom Theme System** - Dark/Light mode with smooth transitions
-- **Responsive Design** - Mobile-first approach
+### 🧠 Mental Health Benefits
+- Therapy & Counseling (12 sessions/year)
+- Psychiatric Consultation (80% coverage)
+- Mindfulness & Meditation Apps (Premium subscription)
+
+### 🏥 OPD Benefits
+- General Physician Consultation (Unlimited)
+- Specialist Consultation (5 consultations/year)
+- Pharmacy & Lab Tests (20% discount)
 
 ---
 
-## 📱 Screenshots
+## 🛠️ Technology Stack
 
-<div align="center">
-
-| Home Page | Benefits Results | Action Plan |
-|-----------|------------------|-------------|
-| Input your health concern | View matched benefits | Get step-by-step guide |
-
-</div>
+- **React 19** (with hooks)
+- **TypeScript**
+- **Vite**
+- **Tailwind CSS**
+- **Redux Toolkit & RTK Query**
+- **Google Gemini API**
+- **Axios**
+- **Lottie React**
 
 ---
 
@@ -153,53 +242,6 @@ The built files will be in the `dist/` directory.
 
 ---
 
-## 🎯 How It Works
-
-### 1. **Input Analysis**
-- User describes their health concern in natural language
-- AI analyzes the text using Google Gemini API
-- System classifies the concern into one of four categories:
-  - 🦷 **Dental** - Oral health, teeth, gums
-  - 👁️ **Vision** - Eye care, vision correction
-  - 🧠 **Mental Health** - Therapy, counseling, wellness
-  - 🏥 **OPD** - General medicine, consultations
-
-### 2. **Benefit Matching**
-- System fetches relevant benefits from the curated database
-- Displays matching benefits with coverage details and descriptions
-- Users can browse and compare available options
-
-### 3. **Action Plan Generation**
-- AI generates personalized 3-step action plans
-- Provides clear, actionable steps to avail the selected benefit
-- Includes practical guidance and next steps
-
----
-
-## 📊 Available Benefits
-
-### 🦷 Dental Benefits
-- Annual Dental Check-up & Cleaning (₹3,000/year)
-- Root Canal Treatment (50% coverage)
-- Tooth Extraction (₹1,500 coverage)
-
-### 👁️ Vision Benefits
-- Annual Eye Examination (Free)
-- Prescription Eyeglasses (₹5,000 allowance)
-- Contact Lens Coverage (₹4,000/year)
-
-### 🧠 Mental Health Benefits
-- Therapy & Counseling (12 sessions/year)
-- Psychiatric Consultation (80% coverage)
-- Mindfulness & Meditation Apps (Premium subscription)
-
-### 🏥 OPD Benefits
-- General Physician Consultation (Unlimited)
-- Specialist Consultation (5 consultations/year)
-- Pharmacy & Lab Tests (20% discount)
-
----
-
 ## 🔧 Configuration
 
 ### Environment Variables
@@ -213,6 +255,19 @@ The built files will be in the `dist/` directory.
 - **Benefits Database**: Edit `public/benefits.json` to add/modify available benefits
 - **Styling**: Modify `tailwind.config.js` for theme customization
 - **API Configuration**: Update API endpoints in `src/aiservices/`
+
+---
+
+## 🚦 Known Issues & Potential Improvements
+
+- Gemini API misclassifies edge-case user inputs.
+  - **Improvement:** Add manual override and feedback mechanism for user correction.
+- No offline support.
+  - **Improvement:** Add service worker and local cache for progressive web app (PWA) support.
+- Action plans could benefit from more context (e.g., location-based hospital suggestions).
+  - **Improvement:** Integrate location services or user profile data.
+- Mobile animations can lag on low-end devices.
+  - **Improvement:** Add animation quality selector or fallback static graphics.
 
 ---
 
