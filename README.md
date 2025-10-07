@@ -90,11 +90,11 @@ Gemini AI Classification (via geminiService.ts)
 
 <div align="center">
 
-### 1. Home Page (Light Mode)
-<img src="504260e4a6e64338894c8fe534ad922d.jpg" alt="Home Page Light Mode" width="800"/>
+### 1. Home Page (Dark Mode)
+<img src="aec0adb2102a42449896d298a9568333.jpg " alt="Home Page Light Mode" width="800"/>
 
 ### 2. Home Page (Dark Mode, Input Example)
-<img src="aec0adb2102a42449896d298a9568333.jpg " alt="Home Page Dark Mode" width="800"/>
+<img src="504260e4a6e64338894c8fe534ad922d.jpg" alt="Home Page Dark Mode" width="800"/>
 
 ### 3. Matched Benefits (Dark Mode)
 <img src="3d8343eab0c04afd9b8a8e2441feca30.jpg   " alt="Matched Benefits Page" width="800"/>
