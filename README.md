@@ -97,7 +97,7 @@ Gemini AI Classification (via geminiService.ts)
 <img src="aec0adb2102a42449896d298a9568333.jpg " alt="Home Page Dark Mode" width="800"/>
 
 ### 3. Matched Benefits (Dark Mode)
-<img src="875b5da1f19b452eaf0179a2dab4e92b.jpg   " alt="Matched Benefits Page" width="800"/>
+<img src="3d8343eab0c04afd9b8a8e2441feca30.jpg   " alt="Matched Benefits Page" width="800"/>
 
 </div>
 
